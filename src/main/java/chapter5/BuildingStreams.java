@@ -24,7 +24,7 @@ public class BuildingStreams {
         System.out.println(sum);
 
         long uniqueWords = 0;
-        try (Stream<String> lines = Files.lines(Paths.get("data.txt"), Charset.defaultCharset())) {
+        try (Stream<String> lines = Files.lines(Paths.get("src/main/resources/data.txt"), Charset.defaultCharset())) {
             uniqueWords = lines.flatMap(line -> Arrays.stream(line.split(" "))).distinct().count();
             System.out.println(uniqueWords);
         } catch (IOException e) {
