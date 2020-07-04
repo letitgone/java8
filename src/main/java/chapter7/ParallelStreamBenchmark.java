@@ -1,6 +1,7 @@
 package chapter7;
 
 import java.util.function.Function;
+import java.util.stream.LongStream;
 import java.util.stream.Stream;
 
 /**
@@ -27,10 +28,17 @@ public class ParallelStreamBenchmark {
         return fastest;
     }
 
+    public static long rangedSum(long n) {
+        return LongStream.rangeClosed(1, n).reduce(0L, Long::sum);
+    }
+
     public static void main(String[] args) {
         System.out.println(parallelSum(100));
         System.out.println(measureSumPerf(ParallelStreams::sequentialSum, 10_000_000) + " msecs");
         System.out.println("Iterative sum done in:" + measureSumPerf(ParallelStreams::iterativeSum, 10_000_000) + " msecs");
         System.out.println("Parallel sum done in: " + measureSumPerf(ParallelStreams::parallelSum, 10_000_000) + " msecs");
+        System.out.println("Ranged sum done in: " + measureSumPerf(ParallelStreams::rangedSum, 10_000_000) + " msecs");
+        System.out.println("Parallel range sum done in: " + measureSumPerf(ParallelStreams::parallelRangedSum, 10_000_000) + " msecs");
+        System.out.println("ForkJoin sum done in " + measureSumPerf(ForkJoinSumCalculator::forkJoinSum, 10_000_000) + " msecs");
     }
 }

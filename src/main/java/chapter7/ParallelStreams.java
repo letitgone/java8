@@ -3,6 +3,10 @@ package chapter7;
 import java.util.stream.LongStream;
 import java.util.stream.Stream;
 
+/**
+ * @Author ZhangGJ
+ * @Date 2020/07/03 23:13
+ */
 public class ParallelStreams {
 
     public static long iterativeSum(long n) {
